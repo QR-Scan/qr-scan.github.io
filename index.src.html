@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh">
+
   <head>
     <!-- Basic page info -->
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>QR Reader Barcode Scanner</title>
 
@@ -26,132 +24,175 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="./images/icon.png" />
     <meta property="og:description" content="QR Reader and Barcode Scanner" />
-    <link rel="stylesheet" href="assets/swiper-bundle.min.css" />
     <style>
       body {
         margin: 0;
         /* background-color: #f4f5f5; */
       }
+
       .page {
         box-sizing: border-box;
-        width: 750px;
+        width: 90vw;
         /* height: 100vh; */
         display: flex;
-        justify-items: center; /* 水平居中*/
+        justify-items: center;
+        /* 水平居中*/
         flex-direction: column;
         /* align-items: center; */
         /* background-color: rgba(255, 0, 0, 0.176); */
         margin: auto;
-        padding-bottom: 10vh;
-        /* padding: 10vh; */
-        /* background-color: #fff; */
+        padding-bottom: 5vh;
+        position: relative;
       }
-      @media screen and (max-width: 750px) {
-        .page {
-          width: 100vw;
-        }
-        .content-text {
-          padding: 20px;
-        }
+      .shadow-box{
+          display: none;
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: white;
+          opacity: 0.7;
+          z-index: 7;
       }
       .header {
         width: 100%;
-        /* overflow: hidden; */
       }
-      .header > img {
+
+      .header>img {
         width: 100%;
         border-radius: 10px;
       }
-      img {
+
+      .nav {
+        box-sizing: border-box;
+        height: 50px;
+        overflow: hidden;
+        /* background-color: red; */
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+      }
+      span{
+        width: 70%;
+        overflow: hidden;
+      }
+      /* img {
         width: 100%;
+      } */
+      .nav img {
+        height: 30px;
+        margin-right: 10px;
+      }
+      .nav div{
+        animation: all 1s linear;
+      }
+      .arrow,.arrow-top{
+        width: 7px;
+        height: 7px;
+        border-top: 2px solid #000;
+        border-right: 2px solid #000000;
+        transform: rotate(135deg);
+        position: absolute;
+        right: 10px;
+        z-index: 10;
+      }
+      .arrow-top{
+        transform: rotate(-45deg);
       }
       .icon-des {
-        width: 80%;
+        /* width: 50%; */
         display: flex;
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, -25px);
+        flex-direction: row;
+        align-items: center;
+        position: absolute;
+        z-index: 10;
+        /* left: 10px; */
+        top: 50px;
+        display: none;
         box-shadow: 0.03rem 0 0.62rem rgb(13 3 3 / 18%);
-        background: #fff;
-        padding: 25px 0;
-        border-radius: 20px;
+        /* opacity: 0.9; */
+        background: #F7F7F7;
+        padding: 50px 0;
+        /* height: 400px; */
+        font-size: 20px;
+        border-radius: 15px;
         font-family: PingFangSC-Regular, -apple-system, BlinkMacSystemFont,
           Segoe UI, Roboto, Helvetica Neue, Tahoma, PingFang SC, Microsoft Yahei,
           Arial, Hiragino Sans GB, sans-serif;
+          
+      }
+      .icon-des img{
+        width: 200px;
       }
       .des-left {
         flex: 1;
         text-align: center;
         margin: 0 20px;
+        /* opacity: 1; */
       }
+
       .des-right {
         flex: 4;
         margin: 0 20px;
+        color: #000;
       }
+
       .content-text {
         margin-top: -5px;
         color: #666;
         font-family: PingFangSC-Regular, -apple-system, BlinkMacSystemFont,
           Segoe UI, Roboto, Helvetica Neue, Tahoma, PingFang SC, Microsoft Yahei,
           Arial, Hiragino Sans GB, sans-serif;
-        font-size: 14px;
+        font-size: 18px;
       }
+
       h2 {
         color: #6ba4f6;
       }
 
-      .slideShow {
-        position: relative;
-        top: 40px;
-        /* height: 300px; */
-      }
-      .swiper {
-        width: calc(100% - 40px);
-        /* height: 300px; */
-      }
-      .swiper-button-next,
-      .swiper-button-prev {
-        background-color: rgba(36, 37, 39, 0.096);
-      }
-      .swiper-button-next::after,
-      .swiper-button-prev::after {
-        font-size: 18px;
-      }
-      .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: #fff;
-        /* Center slide text vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
+      .pictrues {
         display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
+        flex-wrap: wrap;
         justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-        transition: 300ms;
-        transform: scale(0.8);
-        border-radius: 15px;
-        overflow: hidden;
       }
 
-      .swiper-slide-active,
-      .swiper-slide-duplicate-active {
-        transform: scale(1);
+      .swiper-slide img {
+        width: 250px;
+        margin: 20px;
+        border-radius: 20px;
+      }
+
+      @media screen and (max-width: 750px) {
+        .page {
+          width: 100vw;
+        }
+
+        .content-text {
+          padding: 20px;
+        }
+
+        .swiper-slide img {
+          width: 95vw;
+          margin: 20px;
+          border-radius: 20px;
+        }
+        .icon-des{
+          flex-direction: column;
+        }
       }
     </style>
   </head>
+
   <body>
     <div class="page">
-      <div class="header">
-        <img src="./images/header.png" alt="" srcset="" />
+      <div class="nav">
+        <img src="./images/icon.png" alt="" srcset="">
+        <span>Free and fast QR Reader and Barcode Scanner</span>
+        <div class="arrow"></div>
       </div>
-
       <div class="icon-des">
         <div class="des-left">
           <img src="./images/icon.png" alt="" srcset="" />
@@ -163,6 +204,12 @@
           online services; Amazon, eBay and Google - 100% FREE!
         </div>
       </div>
+      <div class="header">
+        <img src="./images/header.png" alt="" srcset="" />
+
+      </div>
+
+
 
       <div class="content-text">
         <h2>Support All QR & Barcode Formats</h2>
@@ -212,72 +259,67 @@
         This is a must-have QR code scanner, enjoy its speed and convenience
         now!
       </div>
-      <div class="slideShow">
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="./images/preview/1.png" alt="" srcset="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/preview/2.png" alt="" srcset="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/preview/3.png" alt="" srcset="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/preview/4.png" alt="" srcset="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/preview/5.png" alt="" srcset="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/preview/6.png" alt="" srcset="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/preview/7.png" alt="" srcset="" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/preview/8.png" alt="" srcset="" />
-            </div>
-          </div>
-          <!-- 如果需要分页器 -->
-          <div class="swiper-pagination"></div>
+      <div class="pictrues">
+        <div class="swiper-slide">
+          <img src="./images/preview/1.png" alt="" srcset="" />
+        </div>
+        <div class="swiper-slide">
+          <img src="./images/preview/2.png" alt="" srcset="" />
+        </div>
+        <div class="swiper-slide">
+          <img src="./images/preview/3.png" alt="" srcset="" />
+        </div>
+        <div class="swiper-slide">
+          <img src="./images/preview/4.png" alt="" srcset="" />
+        </div>
+        <div class="swiper-slide">
+          <img src="./images/preview/5.png" alt="" srcset="" />
+        </div>
+        <div class="swiper-slide">
+          <img src="./images/preview/6.png" alt="" srcset="" />
+        </div>
+        <div class="swiper-slide">
+          <img src="./images/preview/7.png" alt="" srcset="" />
+        </div>
+        <div class="swiper-slide">
+          <img src="./images/preview/8.png" alt="" srcset="" />
         </div>
       </div>
     </div>
-
-    <script src="assets/swiper-bundle.min.js"></script>
+    <div class="shadow-box"></div>
+    </div>
     <script>
-      var mySwiper = new Swiper('.swiper', {
-        // direction: 'vertical', // 垂直切换选项
-        loop: true, // 循环模式选项
-        freeMode: true,
-        // 如果需要分页器
-        pagination: {
-          el: '.swiper-pagination'
-        },
-
-        // 如果需要前进后退按钮
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        },
-        autoplay: true,
-        // 如果需要滚动条
-        scrollbar: {
-          el: '.swiper-scrollbar'
-        },
-        initialSlide: 1,
-        slidesPerView: 3,
-        spaceBetween: 20,
-        centeredSlides: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
+      let arrowDom = document.querySelector('.arrow')
+      let nav = document.querySelector('.nav')
+      let iconDes = document.querySelector('.icon-des')
+      let shadowBox = document.querySelector('.shadow-box')
+      
+      let flat = 0, arrowClass = ['arrow', 'arrow-top']
+      nav.addEventListener('click',()=>{
+        if (flat===0) {
+          flat=1
+          iconDes.style.display = 'flex'
+          shadowBox.style.display = 'block'
+        }else{
+          flat=0
+          iconDes.style.display = 'none'
+          shadowBox.style.display = 'none'
         }
+        arrowDom.className = arrowClass[flat]
+      })
+      shadowBox.addEventListener('click',()=>{
+        if (flat===0) {
+          flat=1
+          iconDes.style.display = 'flex'
+          shadowBox.style.display = 'block'
+        }else{
+          flat=0
+          iconDes.style.display = 'none'
+          shadowBox.style.display = 'none'
+        }
+        arrowDom.className = arrowClass[flat]
       })
     </script>
   </body>
+
 </html>
