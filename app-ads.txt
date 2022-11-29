@@ -1,3 +1,7 @@
+mintegral.com, 33061, DIRECT, 0aeed750c80d6423
+
+google.com, pub-8843662128307653, DIRECT, f08c47fec0942fa0
+
 facebook.com, 1524353127860286, RESELLER, c3e20eee3f780d68
 
 applovin.com, 253f10153ac60b0f29108a8ba0d5384b, DIRECT
